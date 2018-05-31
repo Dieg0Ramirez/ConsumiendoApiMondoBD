@@ -5,59 +5,62 @@
     <div class="card-body">
         <form (submit)="addTask($event)">
             <div class="input-group">
-                <input type="text" name="rol" [(ngModel)]="rol" required placeholder="Ingrese id rol" class="form-control" required>
+                <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Ingrese nombre" class="form-control" required>
+                <input type="text" name="apellido" [(ngModel)]="apellido" placeholder="Ingrese apellido" class="form-control" required>
+                <input type="text" name="rol" id="rol" [(ngModel)]="rol" required placeholder="Ingrese id rol" class="form-control">
                 <input type="password" name="contrasena" [(ngModel)]="contrasena" placeholder="********" class="form-control" required>
                 <input type="text" name="usuario" [(ngModel)]="usuario" placeholder="User01" class="form-control" required>
                 <input type="text" name="email" [(ngModel)]="email" placeholder="Ejemplo@gmail.com" class="form-control" required>
-                <input type="text" name="apellido" [(ngModel)]="apellido" placeholder="Ochoa" class="form-control" required>
-                <input type="text" name="nombre" [(ngModel)]="nombre" placeholder="Diego" class="form-control" required>
                 <span class="input-group-addon">
                   <button type="submit" class="btn btn-primary">
-                      Add Task
+                      Agregar Usuario
+                      
                   </button>
+                  
               </span>
             </div>
         </form>
+
     </div>
 </div>
-
 <table class="table">
     <thead>
         <tr>
-            <th>_Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
             <th>Rol</th>
             <th>Contraseña</th>
             <th>usuario</th>
             <th>email</th>
-            <th>Apellido</th>
-            <th>Nombre</th>
         </tr>
     </thead>
     <tbody>
         <tr *ngFor="let task of list">
-            <!--
-            <td>
-                <input type="checkbox" [checked]="task.nombre" (click)="updateTask(task)">
-            </td> -->
-
-            <td>{{task._id}}</td>
+            <td>{{task.nombre}}</td>
+            <td>{{task.apellido}}</td>
             <td>{{task.rol}}</td>
             <td>{{task.contrasena}}</td>
             <td>{{task.usuario}}</td>
             <td>{{task.email}}</td>
-            <td>{{task.apellido}}</td>
-            <td>{{task.nombre}}</td>
+
 
             <td>
                 <button class="btn btn-danger" (click)="deleteTask(task._id)">
-                  <i class="glyphicon glyphicon-trash"></i>R
+                  <i class="glyphicon glyphicon-trash"></i>Eliminar
               </button>
             </td>
             <td>
-                <button class="btn btn-primary" (click)="updateTask(task)">
-                <i class="glyphicon glyphicon-trash"></i>U
-            </button>
+
+                <button class="btn btn-info" (click)="mostrarDatos(task)">
+                            <i class="glyphicon glyphicon-trash"></i>Editar
+                            </button>
+            </td>
+            <td>
+                <button class="btn btn-success" (click)="updateTask(task)">
+                            <i class="glyphicon glyphicon-trash"></i>Actualizar
+                            </button>
             </td>
         </tr>
+
     </tbody>
 </table>

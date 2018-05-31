@@ -1,6 +1,6 @@
 export class Task{
-    _id?:number;
-    rol:String;
+    _id?:string;
+    rol:string;
     contrasena:string;
     usuario:string;
     email:string;

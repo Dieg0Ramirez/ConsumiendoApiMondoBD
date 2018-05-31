@@ -11,7 +11,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./task.component.css']
 })
 export class TaskComponent implements OnInit {
-    tasks:Task[];
+    tasks:Task[] = [];
+    _id:string;
     rol:string;
     contrasena:string;
     usuario:string;
@@ -22,13 +23,12 @@ export class TaskComponent implements OnInit {
     constructor (private http:HttpClient, private TaskService: TaskService){
       this.TaskService.getTask()
       .subscribe((tasks:any)=>{
+        this.nombre=tasks.nombre
         console.log(tasks);
         this.list = tasks.object;
       })
     }
-    ngOnInit():void{
-        // this.http.get<UserResponse>(this.ROOT_URL).subscribe((data:any)=>{
-        // this.list = data.object;
+    ngOnInit(){
     }
     
     addTask(event) {
@@ -40,19 +40,12 @@ export class TaskComponent implements OnInit {
       usuario:this.usuario,
       email:this.email,
       apellido:this.apellido,
-      nombre:this.apellido
+      nombre:this.nombre
     }
     this.TaskService.addTask(newTask)
       .subscribe((task:any) => {
         this.tasks.push(task);
-        this.rol=''
-        this.contrasena='',
-        this.usuario='',
-        this.email='',
-        this.apellido='',
-        this.apellido=''
-      
- 
+        location.reload();
       });
   }
       deleteTask(id) {
@@ -75,17 +68,22 @@ export class TaskComponent implements OnInit {
         return location.reload(); 
             }
       updateTask(task: Task) {
-        const newTask = {
+        const response = confirm('¿Deseas actualizar  esta información');
+    
+        if (response) {
+        const newTask = { 
           _id: task._id,
-          rol:task.rol,
-          contrasena:task.contrasena,
-          usuario:task.usuario,
-          email:task.email,
-          nombre:task.nombre,
-          apellido:task.apellido
+          rol:this.rol,
+          contrasena:this.contrasena,
+          usuario:this.usuario,
+          email:this.email,
+          nombre:this.nombre,
+          apellido:this.apellido
         };
+        console.log(newTask);
         this.TaskService.updateTask(newTask)
           .subscribe(res => {
+            task.rol= task.rol;
             task.contrasena = task.contrasena;
             task.usuario = task.usuario;
             task.email = task.email;
@@ -93,11 +91,17 @@ export class TaskComponent implements OnInit {
             task.apellido = task.apellido;
           });
     
+        }
   
+        }
+        mostrarDatos(task : Task){
+          this._id = task._id;
+          this.rol = task.rol;
+          this.contrasena = task.contrasena;
+          this.usuario = task.usuario;
+          this.email = task.email;
+          this.nombre = task.nombre;
+          this.apellido = task._id;
+          this.apellido = task._id;
     }
-   
-  
-  
-  
-  
   }

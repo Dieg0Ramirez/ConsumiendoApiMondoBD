@@ -14,6 +14,9 @@ export class TaskService {
   getTask(){
     return this.http.get<Task[]>(`${this.domain}/api/usuarios`).pipe(res => res);    
   }
+  getTask1(id){
+    return this.http.get<Task[]>(`${this.domain}/api/usuario/${id}`).pipe(res => res);    
+  }
 
   addTask(newTask: Task){
     return this.http.post<Task[]>(`${this.domain}/api/usuario`,newTask).pipe(res => res); 
@@ -23,8 +26,6 @@ export class TaskService {
     return this.http.delete<Task[]>(`${this.domain}/api/usuario/${id}`).pipe(res=>res);
   }
   updateTask(newTask){
-    return this.http.put<Task[]>(`${this.domain}/api/usuario/${newTask.id}`,newTask).pipe(res=>res);
+    return this.http.put<Task[]>(`${this.domain}/api/usuario/${newTask._id}`, newTask).pipe(res=>res);
   }
-
-  
 }
